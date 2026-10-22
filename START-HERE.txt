@@ -1,0 +1,42 @@
+NINETY PLUS — WORLD FOOTBALL 26 JERSEY STORE
+============================================
+
+QUICK START WITH DOCKER (RECOMMENDED)
+1. Install Docker Desktop / Docker Engine with the Compose plugin.
+2. Open a terminal in this project folder.
+3. Run: docker compose up --build -d
+4. Open: http://localhost:3000
+5. Health check: http://localhost:3000/api/health
+
+USE THE INCLUDED LOCAL POSTGRESQL CONTAINER INSTEAD OF NEON
+Run:
+  docker compose -f compose.yaml -f compose.local.yaml up --build -d
+
+RUN WITH NODE.JS DIRECTLY
+Requires Node.js 20 or later.
+1. Review .env and DATABASE_URL.
+2. Run: npm install
+3. Run: npm start
+4. Open: http://localhost:3000
+
+RESPONSIVE UI
+The storefront is designed for desktop, tablet and mobile layouts. It includes search,
+country/category filters, sorting, product quick-shop, sizes, wishlist, cart quantity
+controls, shipping progress, delivery form, newsletter signup and order confirmation.
+
+DATABASE
+The .env file contains the PostgreSQL/Neon connection string requested for this project.
+Keep this ZIP and .env private. Do not commit .env or publish it. Rotate the database
+password if it has been exposed outside a trusted environment. .env is not copied into
+the Docker image.
+
+DOCKER IMAGE NOTE
+The Dockerfile and Compose files are included. Build the image on your computer with
+"docker compose up --build -d". A prebuilt image archive is not included.
+
+CHECKS
+Run: npm run check
+This performs JavaScript syntax checks. Full Docker/Neon integration still requires a
+working Docker installation and network access to your configured PostgreSQL database.
+
+See README.md for API routes, database behavior, troubleshooting and production notes.

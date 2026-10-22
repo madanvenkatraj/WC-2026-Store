@@ -1,0 +1,27 @@
+# Optional local PostgreSQL override.
+# Run: docker compose -f compose.yaml -f compose.local.yaml up --build
+services:
+  jersey-store:
+    environment:
+      DATABASE_URL: postgresql://jersey_app:jersey_local_password@db:5432/jersey_store
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16-alpine
+    container_name: world-cup-jersey-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jersey_app
+      POSTGRES_PASSWORD: jersey_local_password
+      POSTGRES_DB: jersey_store
+    volumes:
+      - jersey_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jersey_app -d jersey_store"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  jersey_postgres_data:

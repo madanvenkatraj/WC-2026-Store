@@ -1,0 +1,15 @@
+services:
+  jersey-store:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: world-cup-2026-jersey-store:latest
+    container_name: world-cup-jersey-store
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - "3000:3000"
